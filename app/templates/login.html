@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}- PlantGuard{% endblock %}
+
+{% block extra_css %}
+<link
+href="{{ url_for('static', filename='styles/login.css') }}"
+rel="stylesheet"
+type="text/css"
+media="all"
+/>
+<link
+href="{{ url_for('static', filename='styles/style.css') }}"
+rel="stylesheet"
+type="text/css"
+media="all"
+/>
+<link
+  href="{{ url_for('static', filename='styles/home.css') }}"
+  rel="stylesheet"
+  type="text/css"
+  media="all"
+/>
+    
+  
+  {% endblock %}
+  {%block content%}
+  <div class="container1">
+    <div class="form-wrapper">
+        <div class="form-side">
+          <div class="logo-container">
+            <div class="logo">
+              <a href="{{ url_for('home') }}">
+                <span>🌿Leaf Guard🌿</span>
+              </a>
+            </div>
+          </div>
+          <h1>Welcome Back</h1>
+          <p class="subtitle">
+            Sign in to continue monitoring your plant health
+          </p>
+
+          <form
+            method="POST"
+            action="{{ url_for('auth.login') }}"
+            class="login-form"
+          >
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+
+            
+            <button type="submit" class="btn-primary">Sign In</button>
+          </form>
+
+          <div class="form-footer">
+            <p>
+              Don't have an account?
+              <a href="{{url_for('register')}}">Create Account</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="image-side">
+          <div class="overlay">
+            <div class="text-content">
+              <h2>Detect plant diseases instantly</h2>
+              <p>
+                Our AI-powered tool helps you identify problems early and find
+                the right solutions to protect your crops and improve yield.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+

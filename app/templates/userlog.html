@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block title %}PlantGuard - Plant Database{% endblock %}
+
+{% block extra_css %}
+  <link
+      href="{{ url_for('static', filename='styles/userlog.css') }}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+  <link
+      href="{{ url_for('static', filename='styles/header.css') }}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+{% endblock %}
+
+{% block content %}
+
+        <section class="main-section">
+        <section class="stats-section ">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="totalSearches">1,247</h3>
+                        <p>Total Searches</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="diseasesDetected">892</h3>
+                        <p>Diseases Detected</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="uniqueLocations">45</h3>
+                        <p>Countries</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="todaySearches">23</h3>
+                        <p>Today's Searches</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters -->
+        <section class="filters-section">
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="dateFilter">Date Range:</label>
+                    <select id="dateFilter">
+                        <option value="all">All Time</option>
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="locationFilter">Location:</label>
+                    <select id="locationFilter">
+                        <option value="all">All Locations</option>
+                        <option value="india">India</option>
+              
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="diseaseFilter">Disease Type:</label>
+                    <select id="diseaseFilter">
+                        <option value="all">All Diseases</option>
+                        <option value="scab">Scab</option>
+<option value="rot">Rot</option>
+<option value="rust">Rust</option>
+<option value="mildew">Mildew</option>
+<option value="blight">Blight</option>
+<option value="spot">Spot</option>
+<option value="leaf spot">Leaf Spot</option>
+<option value="leaf scorch">Scorch</option>
+<option value="leaf mold">Mold</option>
+<option value="measles">Measles</option>
+<option value="curl">Curl Virus</option>
+<option value="mosaic">Mosaic Virus</option>
+<option value="mite">Mite</option>
+<option value="greening">Citrus Greening</option>
+<option value="bacterial">Bacterial</option>
+<option value="virus">Virus</option>
+<option value="healthy">Healthy</option>
+
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <input type="text" id="searchInput" placeholder="Search by user or location...">
+                    <button id="searchBtn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Results Table -->
+        <section class="table-section ">
+            <div class="table-header">
+                <h2>User Search History</h2>
+                <button id="exportBtn" class="export-btn">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+            </div>
+            <div class="table-container">
+                <table id="searchTable">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>User mail</th>
+                            <th>Location</th>
+                            <th>Plant Name</th>
+                            <th>Disease Detected</th>
+                         
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination">
+                <button id="prevPage" class="page-btn">Previous</button>
+                <span id="pageInfo">Page 1 of 10</span>
+                <button id="nextPage" class="page-btn">Next</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal for viewing details -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Search Details</h2>
+            <div id="modalBody">
+                <!-- Details will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+     <script src="{{ url_for('static', filename='script/userlog.js') }}"></script>
+{%endblock%}

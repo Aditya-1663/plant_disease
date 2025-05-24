@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block title %}- PlantGuard{% endblock %}
+
+{% block extra_css %}
+  <link
+href="{{ url_for('static', filename='styles/login.css') }}"
+rel="stylesheet"
+type="text/css"
+media="all"
+/>
+<link
+href="{{ url_for('static', filename='styles/style.css') }}"
+rel="stylesheet"
+type="text/css"
+media="all"
+/>
+<link
+  href="{{ url_for('static', filename='styles/home.css') }}"
+  rel="stylesheet"
+  type="text/css"
+  media="all"
+/>
+    
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
+  
+  {% endblock %}
+  {%block content%}
+    <div class="container1">
+      <div class="form-wrapper">
+        <div class="form-side">
+          <div class="logo-container">
+            <div class="logo">
+              <a href="{{ url_for('home') }}">
+                <span>🌿Leaf Guard🌿</span>
+              </a>
+            </div>
+          </div>
+          <h1>Create Account</h1>
+          <p class="subtitle">
+            Join thousands of farmers protecting their crops
+          </p>
+
+          <form
+            method="post"
+            action="{{ url_for('auth.register') }}"
+            class="register-form"
+          >
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Confirm your password"
+                required
+              />
+            </div>
+
+
+            <button type="submit" class="btn-primary">Create Account</button>
+          </form>
+
+          <div class="form-footer">
+            <p>
+              Already have an account?
+              <a href="{{url_for('login')}}">Sign In</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="image-side">
+          <div class="overlay">
+            <div class="text-content">
+              <h2>Detect plant diseases instantly</h2>
+              <p>
+                Our AI-powered tool helps you identify problems early and find
+                the right solutions to protect your crops and improve yield.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,340 @@
+{% extends 'base.html' %}
+ {% block title %}Leaf Guard - AI Plant Disease Detection{% endblock %}
+{% block extra_css %}
+  <link
+      href="{{ url_for('static', filename='styles/faq.css') }}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+  <link
+      href="{{ url_for('static', filename='styles/home.css') }}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ {% endblock %}
+
+{% block content %}
+    <d iv class="container faq-container">
+      <div class="section-header text-center">
+        <h1>Frequently Asked Questions</h1>
+        <p>Find answers to common questions about Leaf Guard</p>
+      </div>
+
+      <div class="faq-search ">
+        <div class="search-box ">
+          <i class="fas fa-search"></i>
+          <input type="text" id="faq-search-input" placeholder="Search for questions...">
+          <button id="faq-search-clear" class="search-clear hidden">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="faq-categories">
+        <button class="category-btn active" data-category="all">All Questions</button>
+        <button class="category-btn" data-category="general">General</button>
+        <button class="category-btn" data-category="detection">Disease Detection</button>
+        <button class="category-btn" data-category="account">Account & Pricing</button>
+        <button class="category-btn" data-category="technical">Technical</button>
+      </div>
+
+      <div class="faq-list">
+       
+        <div class="faq-category" id="general">
+          <h2>General Questions</h2>
+          
+          <div class="faq-item" data-category="general">
+            <div class="faq-question">
+              <h3>What is Leaf Guard?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Leaf Guard is an AI-powered plant disease detection platform that helps farmers, gardeners, and plant enthusiasts identify and treat plant diseases quickly and accurately. Our system uses advanced image recognition technology to analyze photos of plants and provide instant diagnosis and treatment recommendations.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="general">
+            <div class="faq-question">
+              <h3>How accurate is Leaf Guard?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Leaf Guard has an average accuracy rate of 95% for common plant diseases. Our AI model has been trained on millions of images and is continuously improving through machine learning. However, accuracy may vary depending on image quality, lighting conditions, and the specific disease. For critical cases, we always recommend consulting with a professional agronomist or plant pathologist.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="general">
+            <div class="faq-question">
+              <h3>Which plants and diseases does Leaf Guard support?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Leaf Guard currently supports over 60 plant species and can identify more than 120 common plant diseases. Our database includes most common crops (tomatoes, potatoes, corn, wheat, rice, etc.), fruit trees, ornamental plants, and common garden vegetables. We're constantly expanding our database to include more plants and diseases. You can check the complete list in our <a href="plants.html">Plant Database</a> section.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="general">
+            <div class="faq-question">
+              <h3>Is Leaf Guard available in my country?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Yes! Leaf Guard is available worldwide. Our platform is accessible from any country with internet access. We currently support 12 languages, and we're working on adding more to make our service accessible to as many people as possible.</p>
+            </div>
+          </div>
+        </div>
+        
+      
+        <div class="faq-category" id="detection">
+          <h2>Disease Detection</h2>
+          
+          <div class="faq-item" data-category="detection">
+            <div class="faq-question">
+              <h3>How do I take good photos for accurate disease detection?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>For the best results, follow these guidelines:</p>
+              <ul>
+                <li>Take photos in natural daylight (avoid direct sunlight or flash)</li>
+                <li>Make sure the affected area is in focus and clearly visible</li>
+                <li>Include both healthy and diseased parts of the plant for comparison</li>
+                <li>Take multiple photos from different angles if possible</li>
+                <li>Avoid shadows or glare on the plant</li>
+                <li>Keep the background simple to help the AI focus on the plant</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="detection">
+            <div class="faq-question">
+              <h3>Can Leaf Guard detect nutrient deficiencies?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Yes, Leaf Guard can identify common nutrient deficiencies such as nitrogen, phosphorus, potassium, magnesium, and calcium deficiencies. However, some nutrient deficiencies can look similar to certain diseases, so our system will provide the most likely causes and recommend soil testing for confirmation in ambiguous cases.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="detection">
+            <div class="faq-question">
+              <h3>What information does Leaf Guard provide after detecting a disease?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>After detecting a disease, Leaf Guard provides:</p>
+              <ul>
+                <li>The name and description of the identified disease</li>
+                <li>Confidence level of the diagnosis</li>
+                <li>Detailed information about the disease's cause (fungal, bacterial, viral, etc.)</li>
+                <li>Recommended treatment options (organic and conventional)</li>
+                <li>Prevention tips to avoid future occurrences</li>
+                <li>Similar diseases that might be confused with the diagnosis</li>
+                <li>Links to additional resources and research</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="detection">
+            <div class="faq-question">
+              <h3>Can I use Leaf Guard offline?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Yes, Leaf Guard offers limited offline functionality. You can download a lightweight version of our AI model for the most common plant diseases. This allows basic detection without an internet connection. However, for the most accurate results and access to our complete database, an internet connection is recommended. The offline mode is available for premium users only.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Account & Pricing Questions -->
+        <div class="faq-category" id="account">
+          <h2>Account & Pricing</h2>
+          
+          <div class="faq-item" data-category="account">
+            <div class="faq-question">
+              <h3>Is Leaf Guard free to use?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Leaf Guard offers both free and premium plans:</p>
+              <ul>
+                <li><strong>Free Plan:</strong> Includes up to 10 disease detections per month, access to the plant database, and basic treatment recommendations.</li>
+                <li><strong>Premium Plan ($4.99/month):</strong> Unlimited disease detections, detailed treatment guides, offline mode, priority support, and no advertisements.</li>
+                <li><strong>Professional Plan ($9.99/month):</strong> All premium features plus API access, bulk image processing, advanced analytics, and customized recommendations for commercial growers.</li>
+              </ul>
+              <p>Educational institutions and non-profit organizations may qualify for discounted rates. Contact our support team for more information.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="account">
+            <div class="faq-question">
+              <h3>How do I create an account?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Creating an account is simple:</p>
+              <ol>
+                <li>Click on the "Sign In" button in the top right corner of the page</li>
+                <li>Select "Create Account" on the sign-in page</li>
+                <li>Enter your email address and create a password</li>
+                <li>Verify your email address by clicking the link sent to your inbox</li>
+                <li>Complete your profile with your name and location (optional)</li>
+              </ol>
+              <p>You can also sign up using your Google, Facebook, or Apple account for faster registration.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="account">
+            <div class="faq-question">
+              <h3>Can I cancel my subscription at any time?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Yes, you can cancel your subscription at any time. Here's how:</p>
+              <ol>
+                <li>Log in to your account</li>
+                <li>Go to "Account Settings"</li>
+                <li>Select "Subscription"</li>
+                <li>Click "Cancel Subscription"</li>
+              </ol>
+              <p>Your premium features will remain active until the end of your current billing period. There are no cancellation fees, and you can always resubscribe in the future.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="account">
+            <div class="faq-question">
+              <h3>Do you offer refunds?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>We offer a 7-day money-back guarantee for new subscribers. If you're not satisfied with our service within the first 7 days of your subscription, contact our support team for a full refund. After this period, we do not provide refunds for partial subscription periods, but you can cancel your subscription at any time to prevent future charges.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Technical Questions -->
+        <div class="faq-category" id="technical">
+          <h2>Technical Questions</h2>
+          
+          <div class="faq-item" data-category="technical">
+            <div class="faq-question">
+              <h3>Which devices and browsers are supported?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Leaf Guard works on most modern devices and browsers:</p>
+              <ul>
+                <li><strong>Mobile:</strong> iOS 12+ and Android 8.0+</li>
+                <li><strong>Browsers:</strong> Chrome, Safari, Firefox, Edge (latest 2 versions)</li>
+                <li><strong>Desktop:</strong> Windows 10+, macOS 10.13+, Linux (major distributions)</li>
+              </ul>
+              <p>For the best experience, we recommend using the latest version of Chrome or Safari on a device with a good camera.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="technical">
+            <div class="faq-question">
+              <h3>How does Leaf Guard handle my data and privacy?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>We take your privacy seriously:</p>
+              <ul>
+                <li>Plant images are stored securely and used only for disease detection and improving our AI model</li>
+                <li>Location data is used only for providing localized recommendations and is never shared with third parties</li>
+                <li>We do not sell your personal information to advertisers or other companies</li>
+                <li>You can delete your account and all associated data at any time</li>
+              </ul>
+              <p>For more details, please review our <a href="#">Privacy Policy</a>.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="technical">
+            <div class="faq-question">
+              <h3>Is there an API available for developers?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>Yes, we offer a RESTful API for developers who want to integrate Leaf Guard's disease detection capabilities into their own applications. The API is available with our Professional Plan and includes:</p>
+              <ul>
+                <li>Disease detection endpoints</li>
+                <li>Plant database access</li>
+                <li>Treatment recommendation retrieval</li>
+                <li>Comprehensive documentation and code examples</li>
+                <li>Developer support</li>
+              </ul>
+              <p>For more information and API documentation, visit our <a href="#">Developer Portal</a>.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item" data-category="technical">
+            <div class="faq-question">
+              <h3>How can I report bugs or suggest features?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>We welcome your feedback! You can report bugs or suggest features in several ways:</p>
+              <ul>
+                <li>Use our <a href="feedback.html">Feedback Form</a></li>
+                <li>Email us at support@Leaf Guard.com</li>
+                <li>Join our community forum to discuss with other users and our team</li>
+                <li>For developers, you can submit issues on our GitHub repository</li>
+              </ul>
+              <p>We review all feedback and prioritize improvements based on user needs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-not-found hidden">
+        <div class="not-found-content">
+          <i class="fas fa-search"></i>
+          <h3>No questions found</h3>
+          <p>We couldn't find any questions matching your search. Try different keywords or browse all questions.</p>
+          <button id="reset-search" class="btn btn-primary">View All Questions</button>
+        </div>
+      </div>
+
+      
+    </d>
+   {% endblock %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='script/faq.js') }}"></script>
+   {% endblock %}

@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+ {% block title %}Leaf Guard - AI Plant Disease Detection{% endblock %}
+{% block extra_css %}
+  
+    <link
+      href="{{ url_for('static', filename='styles/feedback.css') }}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+  
+    <link
+      href="{{ url_for('static', filename='styles/home.css') }}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ {% endblock %}
+
+{% block content %}
+    <div class="container feedback-container">
+      <div class="section-header text-center">
+        <h1>We Value Your Feedback</h1>
+        <p>Help us improve our plant disease detection system by sharing your experience</p>
+      </div>
+
+      <div class="feedback-card">
+        <form id="feedback-form" action="{{ url_for('feed.submitfeedback') }}" method="POST">
+          <h2>Feedback Form</h2>
+          <p>Your feedback helps us improve detection accuracy and user experience</p>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="feedback-name">Name</label>
+              <input type="text" id="feedback-name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="feedback-email">Email</label>
+              <input type="email" id="feedback-email" name="email" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>How would you rate your experience?</label>
+            <div class="rating-group">
+              <label class="rating-label" for="rating-1">
+                <input type="radio" id="rating-1" name="rating" value="1">
+                <span class="rating-icon">😐</span>
+                <span class="rating-value">1</span>
+              </label>
+              <label class="rating-label" for="rating-2">
+                <input type="radio" id="rating-2" name="rating" value="2">
+                <span class="rating-icon">😐</span>
+                <span class="rating-value">2</span>
+              </label>
+              <label class="rating-label" for="rating-3">
+                <input type="radio" id="rating-3" name="rating" value="3">
+                <span class="rating-icon">😐</span>
+                <span class="rating-value">3</span>
+              </label>
+              <label class="rating-label" for="rating-4">
+                <input type="radio" id="rating-4" name="rating" value="4">
+                <span class="rating-icon">😊</span>
+                <span class="rating-value">4</span>
+              </label>
+              <label class="rating-label" for="rating-5">
+                <input type="radio" id="rating-5" name="rating" value="5">
+                <span class="rating-icon">😃</span>
+                <span class="rating-value">5</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Feedback Type</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="feedbackType" value="detection" checked>
+                <span>Detection Accuracy</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="feedbackType" value="usability">
+                <span>Usability</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="feedbackType" value="features">
+                <span>Feature Request</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="feedbackType" value="other">
+                <span>Other</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="feedback-message">Your Feedback</label>
+            <textarea id="feedback-message" name="message" rows="5" placeholder="Please share your experience or suggestions..." required></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submit-feedback-btn">
+              <i class="fas fa-comment"></i>
+              <span>Submit Feedback</span>
+              <i class="fas fa-spinner fa-spin hidden"></i>
+            </button>
+            <button type="reset" class="btn btn-outline">Reset Form</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="feedback-info">
+        <div class="info-card">
+          <h3>
+            <i class="fas fa-thumbs-up"></i>
+            How We Use Your Feedback
+          </h3>
+          <ul class="numbered-list">
+            <li>Improve our AI model's detection accuracy</li>
+            <li>Enhance the user interface and experience</li>
+            <li>Develop new features based on user needs</li>
+            <li>Prioritize our development roadmap</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h3>Recent Improvements</h3>
+          <ul class="improvements-list">
+            <li>
+              <h4>Enhanced Detection Accuracy</h4>
+              <p>Improved our AI model to better identify subtle disease symptoms</p>
+            </li>
+            <li>
+              <h4>Multi-language Support</h4>
+              <p>Added support for 10 additional languages based on user requests</p>
+            </li>
+            <li>
+              <h4>Offline Mode</h4>
+              <p>Implemented basic detection capabilities when internet connection is unavailable</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- New Community Feedback Section -->
+      <div class="community-feedback-section">
+        <h2>Community Feedback</h2>
+        <p>See what others are saying about Leaf Guard</p>
+        
+        <div class="feedback-filters">
+          <button class="filter-btn active" data-filter="all">All Feedback</button>
+          <button class="filter-btn" data-filter="detection">Detection Accuracy</button>
+          <button class="filter-btn" data-filter="usability">Usability</button>
+          <button class="filter-btn" data-filter="features">Feature Requests</button>
+        </div>
+        
+        <div class="feedback-list" id="feedback-list">
+          <!-- Feedback items will be dynamically inserted here -->
+        </div>
+        
+        <div class="feedback-pagination">
+          <button class="pagination-btn" id="prev-page-btn" disabled>
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <span class="page-indicator">Page <span id="current-page">1</span> of <span id="total-pages">1</span></span>
+          <button class="pagination-btn" id="next-page-btn">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+
+{% block scripts %}
+
+  <!-- <script src="js/script (1).js"></script> -->
+   
+    <script src="{{ url_for('static', filename='script/feedback.js') }}"></script>
+      {% endblock %}

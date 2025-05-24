@@ -1,0 +1,75 @@
+
+  /* Card enhancements */
+  .custom-card {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 2rem;
+    background-color: #ffffff;
+    /* width: 100%; */
+  }
+   .ocard{
+    width: 70%;
+
+    /* border: #28a745 solid 2px; */
+   }
+  .custom-file-label {
+    display: block;
+    background-color: #f8f9fa;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .custom-file-input {
+    display: block;
+    margin: 1rem auto;
+  }
+  .red{
+    border: red solid 2px;
+  }
+  .mt-3{
+    margin-top: 3rem;
+  }
+  /* Button styling */
+  .custom-btn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s;
+  }
+
+  .custom-btn:hover {
+    background-color: #218838;
+  }
+
+  #captureBtn {
+    border-radius: 6px;
+  }
+
+  /* Image and video preview */
+  #output-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  video#video {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+  }
+
+  /* Responsive layout tweaks */
+  @media (max-width: 768px) {
+    .custom-card {
+      padding: 1.5rem 1rem;
+    }
+  }
+

@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+ {% block title %}Leaf Guard - AI Plant Disease Detection{% endblock %}
+{% block extra_css %}
+    <link
+      href="{{ url_for('static', filename='styles/home.css') }}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+
+    <link
+      href="{{ url_for('static', filename='styles/style.css') }}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+    <link
+      href="{{ url_for('static', filename='styles/detect.css') }}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  {% endblock %}
+
+{% block content %}
+      <div class="container detect-container">
+        <h1>Detect Plant Diseases</h1>
+        <section class="blog_w3ls py-3 pb-5 pt-10" id="test">
+          <div class="container pb-xl-5 pb-lg-3">
+            <div class="row justify-content-center">
+              <div class="col-md-6 ocard">
+                <div class="card custom-card">
+                  <div class="card-body text-center">
+                    <form
+                      id="photoForm"
+                      action="/predict"
+                      method="POST"
+                      enctype="multipart/form-data"
+                    >
+                    <input type="hidden" name="location" id="location" />
+                    <input type="hidden" name="name" value="{{ session['name'] }}" />
+                    <input type="hidden" name="email" value="{{ session['email'] }}" />
+                 
+                      <div class="tabs mb-3">
+                        <button
+                          type="button"
+                          id="uploadTab"
+                          class="tab-btn active"
+                          onclick="showUpload()"
+                        >
+                          Upload Photo
+                        </button>
+                        <button
+                          type="button"
+                          id="cameraTab"
+                          class="tab-btn"
+                          onclick="openCamera()"
+                        >
+                          Use Camera
+                        </button>
+                      </div>
+
+                      <div class="form-group">
+                        
+                        <div id="upload-area" class="upload-area">
+                          <i class="fas fa-file-upload"></i>
+                          <h3>Upload an image</h3>
+                          <p>Click to browse or drag and drop</p>
+                          <label
+                            for="inputImage"
+                            class="btn btn-outline"
+                            id="select-image-btn"
+                            >Select Image</label
+                          >
+                          <input
+                            type="file"
+                            name="file"
+                            class="form-control-file custom-file-input"
+                            id="inputImage"
+                            onchange="previewImage(event)"
+                            style="display: none"
+                          />
+                        </div>
+
+                       
+                        <video
+                          id="video"
+                          width="100%"
+                          height="auto"
+                          autoplay
+                          style="display: none"
+                          class="mt-2"
+                        ></video>
+
+                      
+                        <canvas
+                          id="canvas"
+                          width="640"
+                          height="480"
+                          style="display: none"
+                        ></canvas>
+
+                      
+                        <input
+                          type="hidden"
+                          name="captured_image"
+                          id="capturedImage"
+                        />
+
+                        <button
+                          type="button"
+                          class="btn btn-outline"
+                          id="captureBtn"
+                          style="display: none"
+                          onclick="captureImage()"
+                        >
+                          Capture
+                        </button>
+
+                       
+                        <img
+                          id="output-image"
+                          class="rounded mx-auto d-block mt-3"
+                          style="display: none"
+                        />
+
+                   
+                        <button
+                          class="btn btn-lg custom-btn mt-3"
+                          type="submit"
+                        >
+                          Predict
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      
+          <div class="toast" id="toast">
+            <div class="toast-content">
+              <p class="toast-message">Message goes here</p>
+            </div>
+            <button class="toast-close">&times;</button>
+          </div>
+      
+          <div class="loading-overlay" id="loading-overlay">
+            <div class="spinner"></div>
+            <p>Processing image...</p>
+          </div>
+    {% endblock %}
+
+{% block scripts %}
+
+   
+     <script src="{{ url_for('static', filename='script/detect.js') }}"></script>
+     <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    
+
+    {% endblock %}

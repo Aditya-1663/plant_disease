@@ -1,0 +1,426 @@
+{% extends 'base.html' %}
+
+{% block title %}PlantGuard - Plant Database{% endblock %}
+
+{% block extra_css %}
+
+<style>
+    .plant-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+    }
+    .plant-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .plant-image {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+    .plant-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    .plant-card:hover .plant-image img {
+        transform: scale(1.05);
+    }
+    .plant-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    .plant-scientific {
+        font-style: italic;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    .plant-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+    .classification-section {
+        margin-top: 60px;
+        padding-top: 30px;
+        border-top: 1px solid #dee2e6;
+    }
+    .tab-content {
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+    }
+    .clave-item {
+        margin-bottom: 15px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-5 mb-3">Explore Plants</h1>
+            <p class="lead">Comprehensive database of plant species with detailed information about diseases and treatments</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                <input type="text" id="plantSearch" class="form-control" placeholder="Search plants...">
+                <button class="btn btn-outline-secondary d-none" id="clearSearch" type="button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <select id="plantTypeFilter" class="form-select">
+                <option value="all">All Types</option>
+                <option value="vegetable">Vegetables</option>
+                <option value="fruit">Fruits</option>
+                <option value="grain">Grains</option>
+                <option value="ornamental">Ornamentals</option>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <select id="sortBy" class="form-select">
+                <option value="name-asc">Name (A-Z)</option>
+                <option value="name-desc">Name (Z-A)</option>
+                <option value="family">Family</option>
+                <option value="diseases">Most Diseases</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+        <i class="fas fa-info-circle fs-4 me-3"></i>
+        <div>
+            <h5 class="alert-heading">Understanding Plant Classification</h5>
+            <p class="mb-0">Our database uses a hierarchical classification system with 38 claves (classification keys) to identify plants and their diseases. Each plant is categorized based on morphological characteristics, genetic markers, and susceptibility to specific diseases.</p>
+        </div>
+    </div>
+
+    <div class="row g-4" id="plantsGrid">
+        {% for plant in plants %}
+        <div class="col-md-6 col-lg-4 plant-item" data-type="{{ plant.type }}">
+            <div class="card plant-card h-100">
+                <div class="plant-image ">
+                    <img src="{{ url_for('static', filename='images/' + plant.name + '.jpg') }}" alt="{{ plant.name }}" class="card-img-top">
+                    <span class="plant-badge badge 
+                        {% if plant.type == 'vegetable' %}bg-success
+                        {% elif plant.type == 'fruit' %}bg-danger
+                        {% elif plant.type == 'grain' %}bg-warning
+                        {% else %}bg-info{% endif %}">
+                        {{ plant.type|capitalize }}
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ plant.name }}</h5>
+                    <p class="plant-scientific">{{ plant.scientific_name }}</p>
+                    <p class="card-text">{{ plant.description }}</p>
+                    <div class="plant-meta">
+                        <span><i class="fas fa-disease me-1"></i> {{ plant.diseases_count }} Common Diseases</span>
+                        <span><i class="fas fa-seedling me-1"></i> {{ plant.growth_stages }} Growth Stages</span>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                    <a href="{{ url_for('plant_details', plant_id=plant.id) }}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="classification-section" id="classification-system">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="mb-3">Plant Classification System</h2>
+                <p>Our comprehensive plant database uses a detailed classification system with 38 claves (classification keys) to help identify plants and their susceptibility to diseases. Understanding this system can help you better diagnose and treat plant diseases.</p>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs" id="classificationTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="taxonomy-tab" data-bs-toggle="tab" data-bs-target="#taxonomy" type="button" role="tab">Taxonomic Classification</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="morphology-tab" data-bs-toggle="tab" data-bs-target="#morphology" type="button" role="tab">Morphological Keys</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="disease-tab" data-bs-toggle="tab" data-bs-target="#disease" type="button" role="tab">Disease Susceptibility</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="genetic-tab" data-bs-toggle="tab" data-bs-target="#genetic" type="button" role="tab">Genetic Markers</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="classificationTabContent">
+            <div class="tab-pane fade show active" id="taxonomy" role="tabpanel">
+                <h3>Taxonomic Classification</h3>
+                <p>Plants are classified according to the standard taxonomic hierarchy:</p>
+                <div class="taxonomy-tree p-3 bg-light rounded">
+                    <ul class="list-unstyled">
+                        <li>
+                            <strong>Kingdom: Plantae</strong>
+                            <ul class="list-unstyled ps-4 mt-2">
+                                <li>
+                                    <strong>Division/Phylum</strong>
+                                    <ul class="list-unstyled ps-4 mt-2">
+                                        <li>
+                                            <strong>Class</strong>
+                                            <ul class="list-unstyled ps-4 mt-2">
+                                                <li>
+                                                    <strong>Order</strong>
+                                                    <ul class="list-unstyled ps-4 mt-2">
+                                                        <li>
+                                                            <strong>Family</strong>
+                                                            <ul class="list-unstyled ps-4 mt-2">
+                                                                <li>
+                                                                    <strong>Genus</strong>
+                                                                    <ul class="list-unstyled ps-4 mt-2">
+                                                                        <li><strong>Species</strong></li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <p class="mt-3">Our database includes 14 major plant species across 10 plant families, with detailed information on their taxonomic relationships and disease susceptibility patterns.</p>
+            </div>
+            <div class="tab-pane fade" id="morphology" role="tabpanel">
+                <h3>Morphological Classification Keys</h3>
+                <p>We use 18 morphological claves to identify plants based on their physical characteristics:</p>
+                <div class="row g-4 mt-2">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Leaf Arrangement</h5>
+                                <ul>
+                                    <li>Alternate</li>
+                                    <li>Opposite</li>
+                                    <li>Whorled</li>
+                                    <li>Basal</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Leaf Shape</h5>
+                                <ul>
+                                    <li>Simple</li>
+                                    <li>Compound</li>
+                                    <li>Lobed</li>
+                                    <li>Linear</li>
+                                    <li>Ovate</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Flower Structure</h5>
+                                <ul>
+                                    <li>Regular</li>
+                                    <li>Irregular</li>
+                                    <li>Complete</li>
+                                    <li>Incomplete</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="disease" role="tabpanel">
+                <h3>Disease Susceptibility Classification</h3>
+                <p>We classify plants based on their susceptibility to 12 major disease categories:</p>
+                <div class="row g-4 mt-2">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-danger">Fungal Diseases</h5>
+                                <ul>
+                                    <li><strong>High susceptibility:</strong> Roses, Grapes, Strawberries</li>
+                                    <li><strong>Moderate susceptibility:</strong> Tomatoes, Potatoes, Apples</li>
+                                    <li><strong>Low susceptibility:</strong> Corn, Onions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-warning">Bacterial Diseases</h5>
+                                <ul>
+                                    <li><strong>High susceptibility:</strong> Tomatoes, Bell Peppers, Citrus</li>
+                                    <li><strong>Moderate susceptibility:</strong> Potatoes, Lettuce</li>
+                                    <li><strong>Low susceptibility:</strong> Wheat, Tulips</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="genetic" role="tabpanel">
+                <h3>Genetic Marker Classification</h3>
+                <p>Our advanced classification system includes 8 genetic marker categories that help identify plant species and their disease resistance genes:</p>
+                <div class="row g-4 mt-2">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Disease Resistance Genes</h5>
+                                <p>Plants are classified based on the presence of specific resistance genes:</p>
+                                <ul>
+                                    <li><strong>R-genes:</strong> Present in tomatoes, potatoes, and apples</li>
+                                    <li><strong>PR proteins:</strong> Found in wheat, corn, and rice</li>
+                                    <li><strong>Antimicrobial peptides:</strong> Present in many fruit species</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Genetic Diversity Markers</h5>
+                                <p>We use molecular markers to classify plant varieties:</p>
+                                <ul>
+                                    <li><strong>SSR (Simple Sequence Repeats):</strong> Used for variety identification</li>
+                                    <li><strong>SNPs (Single Nucleotide Polymorphisms):</strong> Used for genetic mapping</li>
+                                    <li><strong>RAPD (Random Amplified Polymorphic DNA):</strong> Used for diversity analysis</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const plantSearch = document.getElementById('plantSearch');
+        const clearSearch = document.getElementById('clearSearch');
+        const plantTypeFilter = document.getElementById('plantTypeFilter');
+        const sortBy = document.getElementById('sortBy');
+        const plantsGrid = document.getElementById('plantsGrid');
+        const plantItems = document.querySelectorAll('.plant-item');
+        
+        // Search functionality
+        plantSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            // Show/hide clear button
+            if (searchTerm) {
+                clearSearch.classList.remove('d-none');
+            } else {
+                clearSearch.classList.add('d-none');
+            }
+            
+            // Filter plants
+            plantItems.forEach(item => {
+                const plantName = item.querySelector('.card-title').textContent.toLowerCase();
+                const scientificName = item.querySelector('.plant-scientific').textContent.toLowerCase();
+                const description = item.querySelector('.card-text').textContent.toLowerCase();
+                
+                if (plantName.includes(searchTerm) || 
+                    scientificName.includes(searchTerm) || 
+                    description.includes(searchTerm)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Reset other filters
+            plantTypeFilter.value = 'all';
+        });
+        
+        // Clear search
+        clearSearch.addEventListener('click', function() {
+            plantSearch.value = '';
+            clearSearch.classList.add('d-none');
+            
+            // Show all plants
+            plantItems.forEach(item => {
+                item.style.display = '';
+            });
+        });
+        
+        // Filter by plant type
+        plantTypeFilter.addEventListener('change', function() {
+            const filterValue = this.value;
+            
+            // Clear search
+            plantSearch.value = '';
+            clearSearch.classList.add('d-none');
+            
+            // Filter plants
+            plantItems.forEach(item => {
+                if (filterValue === 'all' || item.dataset.type === filterValue) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+        
+        // Sort plants
+        sortBy.addEventListener('change', function() {
+            const sortValue = this.value;
+            const itemsArray = Array.from(plantItems);
+            
+            // Sort plants
+            itemsArray.sort((a, b) => {
+                const nameA = a.querySelector('.card-title').textContent;
+                const nameB = b.querySelector('.card-title').textContent;
+                const familyA = a.querySelector('.plant-scientific').textContent;
+                const familyB = b.querySelector('.plant-scientific').textContent;
+                const diseasesA = parseInt(a.querySelector('.plant-meta span:first-child').textContent.match(/\d+/)[0]);
+                const diseasesB = parseInt(b.querySelector('.plant-meta span:first-child').textContent.match(/\d+/)[0]);
+                
+                switch (sortValue) {
+                    case 'name-asc':
+                        return nameA.localeCompare(nameB);
+                    case 'name-desc':
+                        return nameB.localeCompare(nameA);
+                    case 'family':
+                        return familyA.localeCompare(familyB);
+                    case 'diseases':
+                        return diseasesB - diseasesA;
+                    default:
+                        return 0;
+                }
+            });
+            
+            // Reorder the grid
+            itemsArray.forEach(item => {
+                plantsGrid.appendChild(item);
+            });
+        });
+    });
+</script>
+{% endblock %}

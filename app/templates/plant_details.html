@@ -1,0 +1,565 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ plant.name }} - PlantGuard{% endblock %}
+
+{% block extra_css %}
+<style>
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: ">";
+    }
+    .plant-badge {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+    .plant-scientific {
+        font-style: italic;
+        color: #6c757d;
+    }
+    .gallery-item {
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        overflow: hidden;
+        transition: border-color 0.3s ease;
+    }
+    .gallery-item.active {
+        border-color: #0d6efd;
+    }
+    .gallery-item img {
+        width: 100%;
+        height: 70px;
+        object-fit: cover;
+    }
+    .quick-facts li, .classification li {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .quick-facts li:last-child, .classification li:last-child {
+        border-bottom: none;
+    }
+    .quick-facts i {
+        color: #0d6efd;
+        width: 20px;
+        text-align: center;
+        margin-right: 10px;
+    }
+    .disease-item {
+        margin-bottom: 15px;
+    }
+    .disease-header {
+        cursor: pointer;
+    }
+    .disease-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+    }
+    .disease-item.active .disease-content {
+        max-height: 1000px;
+    }
+    .related-plant {
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.3s ease;
+    }
+    .related-plant:hover {
+        transform: translateY(-5px);
+    }
+    .related-plant img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .related-plant p {
+        font-style: italic;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/plants">Plant Database</a></li>
+            <li class="breadcrumb-item active">{{ plant.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="mb-1">{{ plant.name }}</h1>
+            <p class="plant-scientific mb-3">{{ plant.scientific_name }}</p>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+                <span class="plant-badge badge 
+                    {% if plant.type == 'vegetable' %}bg-success
+                    {% elif plant.type == 'fruit' %}bg-danger
+                    {% elif plant.type == 'grain' %}bg-warning
+                    {% else %}bg-info{% endif %}">
+                    {{ plant.type|capitalize }}
+                </span>
+                <span class="plant-badge badge bg-secondary">{{ plant.family }} Family</span>
+            </div>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+                
+                <a href="/detect" class="btn btn-primary">
+                    <i class="fas fa-camera me-1"></i> Detect Disease
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card mb-4">
+                <img src="{{ url_for('static', filename='images/' + plant.name + '.jpg') }}" class="card-img-top" id="mainImage" alt="{{ plant.name }}">
+                <div class="card-body p-2">
+                    <div class="row g-2 ">
+                        
+                      
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Quick Facts</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="quick-facts list-unstyled mb-0">
+                        <li>
+                            <div><i class="fas fa-seedling"></i> Growth Habit:</div>
+                            <strong>{{ plant.quick_facts.growth_habit }}</strong>
+                        </li>
+                        <li>
+                            <div><i class="fas fa-sun"></i> Light Requirements:</div>
+                            <strong>{{ plant.quick_facts.light }}</strong>
+                        </li>
+                        <li>
+                            <div><i class="fas fa-tint"></i> Water Needs:</div>
+                            <strong>{{ plant.quick_facts.water }}</strong>
+                        </li>
+                        <li>
+                            <div><i class="fas fa-thermometer-half"></i> Temperature Range:</div>
+                            <strong>{{ plant.quick_facts.temperature }}</strong>
+                        </li>
+                        <li>
+                            <div><i class="fas fa-ruler-vertical"></i> Height:</div>
+                            <strong>{{ plant.quick_facts.height }}</strong>
+                        </li>
+                        <li>
+                            <div><i class="fas fa-calendar-alt"></i> Growing Season:</div>
+                            <strong>{{ plant.quick_facts.season }}</strong>
+                        </li>
+                        <li>
+                            <div><i class="fas fa-clock"></i> Days to Maturity:</div>
+                            <strong>{{ plant.quick_facts.maturity }}</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Classification</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="classification list-unstyled mb-0">
+                        <li>
+                            <span>Kingdom:</span>
+                            <strong>{{ plant.classification.kingdom }}</strong>
+                        </li>
+                        <li>
+                            <span>Division:</span>
+                            <strong>{{ plant.classification.division }}</strong>
+                        </li>
+                        <li>
+                            <span>Class:</span>
+                            <strong>{{ plant.classification.class }}</strong>
+                        </li>
+                        <li>
+                            <span>Order:</span>
+                            <strong>{{ plant.classification.order }}</strong>
+                        </li>
+                        <li>
+                            <span>Family:</span>
+                            <strong>{{ plant.classification.family }}</strong>
+                        </li>
+                        <li>
+                            <span>Genus:</span>
+                            <strong>{{ plant.classification.genus }}</strong>
+                        </li>
+                        <li>
+                            <span>Species:</span>
+                            <strong>{{ plant.classification.species }}</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="plantTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Overview</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="diseases-tab" data-bs-toggle="tab" data-bs-target="#diseases" type="button" role="tab">Diseases</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="cultivation-tab" data-bs-toggle="tab" data-bs-target="#cultivation" type="button" role="tab">Cultivation</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="claves-tab" data-bs-toggle="tab" data-bs-target="#claves" type="button" role="tab">Classification Keys</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="plantTabContent">
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                            <h2>{{ plant.name }} Overview</h2>
+                            <p>{{ plant.overview }}</p>
+                            
+                            <div class="alert alert-info d-flex align-items-center mt-4" role="alert">
+                                <i class="fas fa-lightbulb fs-4 me-3"></i>
+                                <div>
+                                    <h5 class="alert-heading">Did You Know?</h5>
+                                    <p class="mb-0">{% if plant.id == 'tomato' %}
+                                        Botanically, tomatoes are fruits (berries), but they are commonly considered vegetables in culinary contexts. In 1893, the U.S. Supreme Court legally classified tomatoes as vegetables for taxation purposes.
+                                    {% elif plant.id == 'potato' %}
+                                        Potatoes were the first vegetable to be grown in space! In 1995, potato plants were taken aboard the space shuttle Columbia.
+                                    {% elif plant.id == 'apple' %}
+                                        The science of apple growing is called pomology. There are more than 7,500 known cultivars of apples worldwide.
+                                    {% else %}
+                                        This plant has been cultivated for thousands of years and has played an important role in human agriculture and nutrition throughout history.
+                                    {% endif %}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="diseases" role="tabpanel">
+                            <h2>Common {{ plant.name }} Diseases</h2>
+                            <p>{{ plant.name }} plants are susceptible to numerous diseases that can significantly impact yield and quality. Early identification and proper management are crucial for effective control.</p>
+                            
+                            <div class="accordion mt-4" id="diseasesAccordion">
+                                {% for disease in plant.diseases %}
+                                <div class="accordion-item disease-item">
+                                    <h2 class="accordion-header disease-header" id="heading{{ loop.index }}">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}">
+                                            {{ disease.name }} ({{ disease.scientific }})
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#diseasesAccordion">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <img src="{{ url_for('static', filename='images/placeholder.jpg') }}" class="img-fluid rounded" alt="{{ disease.name }}">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h4>Symptoms</h4>
+                                                    <p>{{ disease.symptoms }}</p>
+                                                    
+                                                    <h4>Conditions</h4>
+                                                    <p>{{ disease.conditions }}</p>
+                                                    
+                                                    <h4>Management</h4>
+                                                    <ul>
+                                                        {% for item in disease.management %}
+                                                        <li>{{ item }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                    
+                                                    <h4>Classification Keys (Claves)</h4>
+                                                    <p>{{ disease.name }} is classified under {{ disease.claves|join(' and ') }} in our classification system.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h3>General Disease Prevention Strategies</h3>
+                                <div class="row g-4 mt-2">
+                                    <div class="col-md-4">
+                                        <div class="card h-100 text-center">
+                                            <div class="card-body">
+                                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+                                                    <i class="fas fa-sync-alt text-primary fs-4"></i>
+                                                </div>
+                                                <h5 class="card-title">Crop Rotation</h5>
+                                                <p class="card-text">Avoid planting related crops in the same location for at least 3 years to break disease cycles.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card h-100 text-center">
+                                            <div class="card-body">
+                                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+                                                    <i class="fas fa-seedling text-primary fs-4"></i>
+                                                </div>
+                                                <h5 class="card-title">Resistant Varieties</h5>
+                                                <p class="card-text">Choose disease-resistant varieties when available. Look for resistance codes on seed packets.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card h-100 text-center">
+                                            <div class="card-body">
+                                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+                                                    <i class="fas fa-tint-slash text-primary fs-4"></i>
+                                                </div>
+                                                <h5 class="card-title">Proper Watering</h5>
+                                                <p class="card-text">Use drip irrigation or soaker hoses to keep foliage dry. Water in the morning so leaves can dry quickly.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="cultivation" role="tabpanel">
+                            <h2>{{ plant.name }} Cultivation</h2>
+                            <p>Successful {{ plant.name }} cultivation requires attention to soil preparation, planting techniques, and ongoing care. Follow these guidelines for healthy plants and abundant harvests.</p>
+                            
+                            <h3 class="mt-4">Soil Requirements</h3>
+                            <p>{{ plant.name }} plants thrive in well-draining, fertile soil with a balanced pH. Before planting:</p>
+                            <ul>
+                                <li>Test soil pH and amend if necessary</li>
+                                <li>Add 2-3 inches of compost or well-rotted manure</li>
+                                <li>Incorporate a balanced fertilizer according to soil test recommendations</li>
+                                <li>Ensure good drainage to prevent root diseases</li>
+                            </ul>
+                            
+                            <h3 class="mt-4">Planting</h3>
+                            <div class="row g-4 mt-2">
+                                <div class="col-md-3">
+                                    <div class="card h-100 position-relative">
+                                        <div class="position-absolute top-0 start-50 translate-middle bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">
+                                            1
+                                        </div>
+                                        <div class="card-body pt-4">
+                                            <h5 class="card-title">Timing</h5>
+                                            <p class="card-text">Plant after all danger of frost has passed and soil temperatures are appropriate.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card h-100 position-relative">
+                                        <div class="position-absolute top-0 start-50 translate-middle bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">
+                                            2
+                                        </div>
+                                        <div class="card-body pt-4">
+                                            <h5 class="card-title">Spacing</h5>
+                                            <p class="card-text">Space plants appropriately to ensure good air circulation and growth.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card h-100 position-relative">
+                                        <div class="position-absolute top-0 start-50 translate-middle bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">
+                                            3
+                                        </div>
+                                        <div class="card-body pt-4">
+                                            <h5 class="card-title">Depth</h5>
+                                            <p class="card-text">Plant at the appropriate depth for the specific plant type.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card h-100 position-relative">
+                                        <div class="position-absolute top-0 start-50 translate-middle bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">
+                                            4
+                                        </div>
+                                        <div class="card-body pt-4">
+                                            <h5 class="card-title">Support</h5>
+                                            <p class="card-text">Install stakes, cages, or trellises at planting time if needed.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="claves" role="tabpanel">
+                            <h2>Classification Keys (Claves)</h2>
+                            <p>Our plant database uses a comprehensive system of 38 classification keys (claves) to identify and categorize plants and their diseases. These keys help in accurate diagnosis and treatment recommendations.</p>
+                            
+                            <h3 class="mt-4">{{ plant.name }}-Specific Classification Keys</h3>
+                            <p>The following claves are particularly relevant for {{ plant.name }} classification and disease identification:</p>
+                            
+                            <div class="accordion mt-4" id="clavesAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingClave1">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseClave1">
+                                            Clave 1: Taxonomic Classification
+                                        </button>
+                                    </h2>
+                                    <div id="collapseClave1" class="accordion-collapse collapse" data-bs-parent="#clavesAccordion">
+                                        <div class="accordion-body">
+                                            <p>{{ plant.name }} belongs to the family {{ plant.family }}, which includes other important related plants. This taxonomic relationship is important for understanding disease susceptibility patterns and crop rotation strategies.</p>
+                                            
+                                            <h5>Key Characteristics</h5>
+                                            <ul>
+                                                <li>Family: {{ plant.classification.family }}</li>
+                                                <li>Genus: {{ plant.classification.genus }}</li>
+                                                <li>Species: {{ plant.classification.species }}</li>
+                                            </ul>
+                                            
+                                            <h5>Implications</h5>
+                                            <p>Plants in the same family often share susceptibility to similar diseases and pests. This is why crop rotation should include avoiding planting related crops in the same location for 3-4 years.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingClave7">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseClave7">
+                                            Clave 7: Morphological Features
+                                        </button>
+                                    </h2>
+                                    <div id="collapseClave7" class="accordion-collapse collapse" data-bs-parent="#clavesAccordion">
+                                        <div class="accordion-body">
+                                            <p>{{ plant.name }} plants have distinctive morphological features that help in identification and classification:</p>
+                                            
+                                            <h5>Key Characteristics</h5>
+                                            <ul>
+                                                <li>{% if plant.id == 'tomato' %}Compound leaves with serrated leaflets{% elif plant.id == 'potato' %}Compound leaves with oval leaflets{% elif plant.id == 'apple' %}Simple, oval leaves with serrated margins{% else %}Distinctive leaf structure and arrangement{% endif %}</li>
+                                                <li>{% if plant.id == 'tomato' %}Yellow, star-shaped flowers with 5 petals{% elif plant.id == 'potato' %}White to purple flowers with yellow stamens{% elif plant.id == 'apple' %}White to pink flowers with 5 petals{% else %}Characteristic flower structure{% endif %}</li>
+                                                <li>{% if plant.id == 'tomato' %}Fruit is a berry with two or more seed cavities{% elif plant.id == 'potato' %}Produces small green fruits containing toxic solanine{% elif plant.id == 'apple' %}Fruit is a pome with a central core containing seeds{% else %}Distinctive fruit type and structure{% endif %}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingClave12">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseClave12">
+                                            Clave 12: Fungal Leaf Spot Diseases
+                                        </button>
+                                    </h2>
+                                    <div id="collapseClave12" class="accordion-collapse collapse" data-bs-parent="#clavesAccordion">
+                                        <div class="accordion-body">
+                                            <p>This classification key helps identify and differentiate various fungal leaf spot diseases that affect {{ plant.name }} plants:</p>
+                                            
+                                            <div class="table-responsive mt-3">
+                                                <table class="table table-bordered">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th>Disease</th>
+                                                            <th>Spot Appearance</th>
+                                                            <th>Pattern</th>
+                                                            <th>Other Features</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% if plant.id == 'tomato' %}
+                                                        <tr>
+                                                            <td>Early Blight</td>
+                                                            <td>Dark brown with concentric rings</td>
+                                                            <td>Starts on lower leaves</td>
+                                                            <td>Yellow halo around spots</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Septoria Leaf Spot</td>
+                                                            <td>Small, circular with dark margins</td>
+                                                            <td>Numerous small spots</td>
+                                                            <td>Tiny black fruiting bodies visible in center</td>
+                                                        </tr>
+                                                        {% elif plant.id == 'apple' %}
+                                                        <tr>
+                                                            <td>Apple Scab</td>
+                                                            <td>Olive-green to brown, velvety spots</td>
+                                                            <td>Scattered across leaf surface</td>
+                                                            <td>Leaves may turn yellow and drop</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Cedar Apple Rust</td>
+                                                            <td>Bright orange-yellow spots</td>
+                                                            <td>Clustered spots with raised centers</td>
+                                                            <td>Tube-like structures on leaf undersides</td>
+                                                        </tr>
+                                                        {% else %}
+                                                        <tr>
+                                                            <td>Common Leaf Spot</td>
+                                                            <td>Varies by pathogen</td>
+                                                            <td>Often begins on lower leaves</td>
+                                                            <td>May have distinctive coloration or pattern</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Secondary Leaf Spot</td>
+                                                            <td>Varies by pathogen</td>
+                                                            <td>Distribution depends on infection source</td>
+                                                            <td>May have specific diagnostic features</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h3 class="mt-4">Complete Classification System</h3>
+                            <p>Our complete classification system includes 38 claves covering all aspects of plant identification, disease diagnosis, and treatment recommendations:</p>
+                            
+                            <div class="row g-4 mt-2">
+                                <div class="col-md-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Taxonomic Claves (1-6)</h5>
+                                            <ul>
+                                                <li>Clave 1: Family Classification</li>
+                                                <li>Clave 2: Genus Classification</li>
+                                                <li>Clave 3: Species Identification</li>
+                                                <li>Clave 4: Variety Classification</li>
+                                                <li>Clave 5: Evolutionary Relationships</li>
+                                                <li>Clave 6: Domestication History</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Disease Claves (12-22)</h5>
+                                            <ul>
+                                                <li>Clave 12: Fungal Leaf Spots</li>
+                                                <li>Clave 13: Oomycete Diseases</li>
+                                                <li>Clave 14: Bacterial Diseases</li>
+                                                <li>Clave 15: Viral Diseases</li>
+                                                <li>Clave 16: Vascular Wilts</li>
+                                                <li>Clave 17: Fruit Rots</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+    {% endblock %}
+    

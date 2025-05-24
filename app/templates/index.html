@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+ {% block title %}Leaf Guard - AI Plant Disease Detection{% endblock %}
+{% block extra_css %}
+ <link
+      href="{{ url_for('static', filename='styles/home.css') }}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+ 
+
+
+    <!-- Hero Section -->
+    <section class="hero ">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Detect Plant Diseases Instantly</h1>
+            <p>Our AI-powered tool helps you identify problems early and find the right solutions to protect your crops and improve yield.</p>
+            <div class="hero-buttons">
+              {% if session.get('name') %}
+              <a href="{{ url_for('detect') }}" class="btn btn-primary">
+                Start Detecting
+                <i class="fas fa-arrow-right"></i>
+              </a>
+              {% else %}
+              <a href="{{ url_for('login') }}" class="btn btn-primary">
+                Get Started
+                <i class="fas fa-arrow-right"></i>
+              </a>
+              {% endif %}
+              <a href="/plants" class="btn btn-outline">Explore Plants</a>
+            </div>
+          </div>
+          <div class="hero-image ">
+            <img src="{{ url_for('static', filename='images/plant.png') }}" alt="Plant disease detection illustration">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>Key Features</h2>
+          <p>Everything you need to protect your plants and improve crop yield</p>
+        </div>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-leaf"></i>
+            <h3>Plant Database</h3>
+            <p>Detailed information on 14 plant species with comprehensive classification</p>
+          </div>
+          
+          <div class="feature-card">
+            <i class="fas fa-camera"></i>
+            <h3>Live Camera</h3>
+            <p>Instantly analyze plant health with our integrated camera system</p>
+          </div>
+          
+          <div class="feature-card">
+            <i class="fas fa-search"></i>
+            <h3>Quick & Simple Identification</h3>
+            <p>Instantly identify plant diseases with just a snap—no expertise needed</p>
+          </div>
+          
+          <div class="feature-card">
+            <i class="fas fa-lightbulb"></i>
+            <h3>Find the Cause, Fix the Problem</h3>
+            <p>Detect the root cause and get instant solutions to treat your plant</p>
+          </div>
+          
+          <div class="feature-card">
+            <i class="fas fa-leaf"></i>
+            <h3>Helping Your Plant Thrive</h3>
+            <p>Support your plant’s health with tailored care and expert tips.</p>
+          </div>
+        
+          
+          <div class="feature-card">
+            <i class="fas fa-comment"></i>
+            <h3>Feedback System</h3>
+            <p>Share your experience and help us improve our detection accuracy</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <h2>How It Works</h2>
+          <p>Three simple steps to identify and treat plant diseases</p>
+        </div>
+        
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Take a Photo</h3>
+            <p>Capture a clear image of the affected plant part using our app</p>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>AI Analysis</h3>
+            <p>Our AI instantly analyzes the image to identify the disease</p>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Get Solutions</h3>
+            <p>Receive detailed treatment recommendations and preventive measures</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+   <section class="cta">
+  <div class="container">
+    <div class="cta-content">
+      {% if session.get('name') %}
+        <h2>Welcome back, {{ session['name'].split()[0] }}!</h2>
+        <p>Start detecting diseases and keeping your crops healthy with real-time insights.</p>
+        <div class="cta-buttons">
+          <a href="{{ url_for('detect') }}" class="btn btn-light">
+            Detect Disease Now <i class="fas fa-search"></i>
+          </a>
+          <a href="/plants" class="btn btn-outline-light">Browse Plant Database</a>
+        </div>
+      {% else %}
+        <h2>Ready to Protect Your Plants?</h2>
+        <p>Join thousands of farmers and gardeners who are improving their crop yield with our AI technology.</p>
+        <div class="cta-buttons">
+          <a href="{{ url_for('login') }}" class="btn btn-light">
+            Sign Up Now <i class="fas fa-arrow-right"></i>
+        
+          <a href="/plants" class="btn btn-outline-light">Explore Plants</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+ 
+
+    {% endblock %}

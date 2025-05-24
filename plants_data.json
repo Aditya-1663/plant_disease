@@ -1,0 +1,619 @@
+[
+  {
+    "id": "tomato",
+    "name": "Tomato",
+    "scientific_name": "Solanum lycopersicum",
+    "type": "vegetable",
+    "family": "Solanaceae",
+    "image": "/static/images/tomato.jpg",
+    "description": "A widely cultivated plant in the family Solanaceae. Tomatoes are susceptible to several diseases including early blight, late blight, and bacterial spot.",
+    "diseases_count": 12,
+    "growth_stages": 4,
+    "quick_facts": {
+      "growth_habit": "Determinate or Indeterminate",
+      "light": "Full Sun",
+      "water": "Moderate",
+      "temperature": "65-85°F (18-29°C)",
+      "height": "3-10 feet (0.9-3 m)",
+      "season": "Spring to Fall",
+      "maturity": "60-100 days"
+    },
+    "classification": {
+      "kingdom": "Plantae",
+      "division": "Magnoliophyta",
+      "class": "Magnoliopsida",
+      "order": "Solanales",
+      "family": "Solanaceae",
+      "genus": "Solanum",
+      "species": "S. lycopersicum"
+    },
+    "overview": "The tomato (Solanum lycopersicum) is a major worldwide crop and a member of the nightshade family (Solanaceae). Originally from western South America, the tomato was domesticated in Mexico and has become one of the most widely grown vegetables globally. Tomato plants are typically bushy or vining annuals that grow 3-10 feet (0.9-3 m) tall. They have compound leaves with serrated edges and produce yellow flowers that develop into fleshy berries (the tomato fruit). The plants have a distinctive aroma caused by the secretion of terpenes from glandular trichomes on the stems and leaves.",
+    "diseases": [
+      {
+        "name": "Early Blight",
+        "scientific": "Alternaria solani",
+        "symptoms": "Dark, concentric rings on lower leaves that gradually move upward. Affected leaves turn yellow, then brown, and eventually fall off. Fruit may develop dark, leathery spots.",
+        "conditions": "Favored by warm temperatures (75-85°F or 24-29°C) and high humidity. The fungus overwinters in soil and plant debris.",
+        "management": [
+          "Rotate crops (3-4 year rotation)",
+          "Remove and destroy infected plant material",
+          "Apply fungicides preventatively",
+          "Use drip irrigation to keep foliage dry",
+          "Plant resistant varieties when available"
+        ],
+        "claves": ["Clave 12 (Fungal Leaf Spots)", "Clave 27 (Alternaria Diseases)"]
+      },
+      {
+        "name": "Late Blight",
+        "scientific": "Phytophthora infestans",
+        "symptoms": "Pale green, water-soaked spots on leaves that rapidly enlarge to become brown-black, oily-looking lesions. White, fuzzy growth may appear on the undersides of leaves in humid conditions. Stems develop dark brown lesions, and fruits develop large, firm, brown spots.",
+        "conditions": "Favored by cool, wet weather (60-70°F or 15-21°C) with high humidity. Can spread rapidly under optimal conditions.",
+        "management": [
+          "Plant resistant varieties",
+          "Apply fungicides preventatively",
+          "Improve air circulation",
+          "Remove and destroy infected plants immediately",
+          "Avoid overhead irrigation"
+        ],
+        "claves": ["Clave 13 (Oomycete Diseases)", "Clave 28 (Phytophthora Diseases)"]
+      }
+    ],
+    "related_plants": [
+      {
+        "id": "potato",
+        "name": "Potato",
+        "scientific_name": "Solanum tuberosum",
+        "image": "/static/images/potato.jpg"
+      },
+      {
+        "id": "eggplant",
+        "name": "Eggplant",
+        "scientific_name": "Solanum melongena",
+        "image": "/static/images/eggplant.jpg"
+      },
+      {
+        "id": "bell-pepper",
+        "name": "Bell Pepper",
+        "scientific_name": "Capsicum annuum",
+        "image": "/static/images/bell-pepper.jpg"
+      }
+    ]
+  },
+  {
+    "id": "potato",
+    "name": "Potato",
+    "scientific_name": "Solanum tuberosum",
+    "type": "vegetable",
+    "family": "Solanaceae",
+    "image": "/static/images/potato.jpg",
+    "description": "A starchy tuber of the plant Solanum tuberosum, a perennial in the family Solanaceae. Potatoes are vulnerable to late blight, early blight, and blackleg.",
+    "diseases_count": 10,
+    "growth_stages": 5,
+    "quick_facts": {
+      "growth_habit": "Herbaceous perennial grown as annual",
+      "light": "Full Sun",
+      "water": "Moderate",
+      "temperature": "60-70°F (15-21°C)",
+      "height": "1-3 feet (0.3-0.9 m)",
+      "season": "Spring to Fall",
+      "maturity": "70-120 days"
+    },
+    "classification": {
+      "kingdom": "Plantae",
+      "division": "Magnoliophyta",
+      "class": "Magnoliopsida",
+      "order": "Solanales",
+      "family": "Solanaceae",
+      "genus": "Solanum",
+      "species": "S. tuberosum"
+    },
+    "overview": "The potato is a starchy tuber of the plant Solanum tuberosum, a perennial in the family Solanaceae. It is one of the world's most important food crops, originating in the Andes of South America. Potatoes are grown for their underground tubers, which develop at the end of stolons. The plant produces white to purple flowers and small green fruits that contain toxic solanine. Potatoes are rich in carbohydrates and contain significant amounts of vitamin C, potassium, and vitamin B6.",
+    "diseases": [
+      {
+        "name": "Late Blight",
+        "scientific": "Phytophthora infestans",
+        "symptoms": "Dark, water-soaked lesions on leaves that quickly enlarge and turn brown to black. White, fuzzy growth appears on the undersides of leaves in humid conditions. Tubers develop reddish-brown to purplish discoloration beneath the skin.",
+        "conditions": "Favored by cool, wet weather (60-70°F or 15-21°C) with high humidity. Can spread rapidly under optimal conditions.",
+        "management": [
+          "Plant resistant varieties",
+          "Apply fungicides preventatively",
+          "Destroy volunteer potatoes",
+          "Remove and destroy infected plants immediately",
+          "Ensure good air circulation"
+        ],
+        "claves": ["Clave 13 (Oomycete Diseases)", "Clave 28 (Phytophthora Diseases)"]
+      }
+    ],
+    "related_plants": [
+      {
+        "id": "tomato",
+        "name": "Tomato",
+        "scientific_name": "Solanum lycopersicum",
+        "image": "/static/images/tomato.jpg"
+      },
+      {
+        "id": "eggplant",
+        "name": "Eggplant",
+        "scientific_name": "Solanum melongena",
+        "image": "/static/images/eggplant.jpg"
+      }
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "Apple",
+    "scientific_name": "Malus domestica",
+    "type": "fruit",
+    "family": "Rosaceae",
+    "image": "/static/images/apple.jpg",
+    "description": "A deciduous tree in the family Rosaceae. Apple trees are prone to apple scab, fire blight, and powdery mildew among other diseases.",
+    "diseases_count": 15,
+    "growth_stages": 6,
+    "quick_facts": {
+      "growth_habit": "Deciduous tree",
+      "light": "Full Sun",
+      "water": "Moderate",
+      "temperature": "60-75°F (15-24°C)",
+      "height": "15-30 feet (4.5-9 m)",
+      "season": "Spring to Fall",
+      "maturity": "3-5 years to fruit"
+    },
+    "classification": {
+      "kingdom": "Plantae",
+      "division": "Magnoliophyta",
+      "class": "Magnoliopsida",
+      "order": "Rosales",
+      "family": "Rosaceae",
+      "genus": "Malus",
+      "species": "M. domestica"
+    },
+    "overview": "The apple tree (Malus domestica) is a deciduous tree in the family Rosaceae grown for its fruit, the apple. It is one of the most widely cultivated fruit trees and has been grown for thousands of years in Asia and Europe. Apple trees are small to medium-sized trees with a broad, often dense crown. The fruit is a pome, with a central core containing seeds surrounded by flesh derived from the floral cup. Apples are rich in fiber, vitamin C, and various antioxidants.",
+    "diseases": [
+      {
+        "name": "Apple Scab",
+        "scientific": "Venturia inaequalis",
+        "symptoms": "Olive-green to brown, velvety spots on leaves and fruit. Severely infected leaves may turn yellow and drop. Fruit develops raised, rough, dark scabby lesions.",
+        "conditions": "Favored by cool, wet spring weather. The fungus overwinters in fallen leaves.",
+        "management": [
+          "Plant resistant varieties",
+          "Apply fungicides during primary infection period",
+          "Remove and destroy fallen leaves",
+          "Prune to improve air circulation",
+          "Avoid overhead irrigation"
+        ],
+        "claves": ["Clave 12 (Fungal Leaf Spots)", "Clave 30 (Venturia Diseases)"]
+      }
+    ],
+    "related_plants": [
+      {
+        "id": "pear",
+        "name": "Pear",
+        "scientific_name": "Pyrus communis",
+        "image": "/static/images/pear.jpg"
+      },
+      {
+        "id": "cherry",
+        "name": "Cherry",
+        "scientific_name": "Prunus avium",
+        "image": "/static/images/cherry.jpg"
+      }
+    ]
+  },
+  {
+    "id": "wheat",
+    "name": "Wheat",
+    "scientific_name": "Triticum aestivum",
+    "type": "grain",
+    "family": "Poaceae",
+    "image": "/static/images/wheat.jpg",
+    "description": "A cereal grain in the family Poaceae. Wheat is susceptible to rust diseases, powdery mildew, and Fusarium head blight.",
+    "diseases_count": 8,
+    "growth_stages": 7,
+    "quick_facts": {
+      "growth_habit": "Annual grass",
+      "light": "Full Sun",
+      "water": "Moderate",
+      "temperature": "60-75°F (15-24°C)",
+      "height": "2-4 feet (0.6-1.2 m)",
+      "season": "Winter or Spring",
+      "maturity": "90-240 days"
+    },
+    "classification": {
+      "kingdom": "Plantae",
+      "division": "Magnoliophyta",
+      "class": "Liliopsida",
+      "order": "Poales",
+      "family": "Poaceae",
+      "genus": "Triticum",
+      "species": "T. aestivum"
+    },
+    "overview": "Wheat (Triticum aestivum) is a grass widely cultivated for its seed, a cereal grain that is a worldwide staple food. It is one of the most important crops globally, providing about 20% of the calories consumed by humans. Wheat is an annual grass with hollow stems and flat leaves. The inflorescence is a spike composed of numerous spikelets, each containing several florets that develop into wheat kernels (the edible grain).",
+    "diseases": [
+      {
+        "name": "Wheat Rust",
+        "scientific": "Puccinia spp.",
+        "symptoms": "Orange-red to brown pustules on leaves, stems, and heads. Severe infections can cause leaf death and reduced grain fill.",
+        "conditions": "Favored by warm, humid conditions. Different rust species have different temperature optima.",
+        "management": [
+          "Plant resistant varieties",
+          "Apply fungicides at early disease onset",
+          "Eliminate volunteer wheat",
+          "Plant early-maturing varieties",
+          "Monitor fields regularly"
+        ],
+        "claves": ["Clave 12 (Fungal Leaf Spots)", "Clave 32 (Rust Diseases)"]
+      }
+    ],
+    "related_plants": [
+      {
+        "id": "corn",
+        "name": "Corn",
+        "scientific_name": "Zea mays",
+        "image": "/static/images/corn.jpg"
+      },
+      {
+        "id": "rice",
+        "name": "Rice",
+        "scientific_name": "Oryza sativa",
+        "image": "/static/images/rice.jpg"
+      }
+    ]
+  },
+  {
+    "id": "cucumber",
+    "name": "Cucumber",
+    "scientific_name": "Cucumis sativus",
+    "type": "vegetable",
+    "family": "Cucurbitaceae",
+    "image": "/static/images/cucumber.jpg",
+    "description": "A widely cultivated plant in the gourd family, Cucurbitaceae. Cucumbers are vulnerable to downy mildew, powdery mildew, and bacterial wilt.",
+    "diseases_count": 9,
+    "growth_stages": 4,
+    "quick_facts": {
+      "growth_habit": "Annual vine",
+      "light": "Full Sun",
+      "water": "High",
+      "temperature": "65-85°F (18-29°C)",
+      "height": "Vining to 6-8 feet (1.8-2.4 m)",
+      "season": "Summer",
+      "maturity": "50-70 days"
+    },
+    "classification": {
+      "kingdom": "Plantae",
+      "division": "Magnoliophyta",
+      "class": "Magnoliopsida",
+      "order": "Cucurbitales",
+      "family": "Cucurbitaceae",
+      "genus": "Cucumis",
+      "species": "C. sativus"
+    },
+    "overview": "The cucumber (Cucumis sativus) is a widely cultivated plant in the gourd family, Cucurbitaceae. It is a creeping vine that bears cylindrical fruits that are used as vegetables. Originally from South Asia, cucumbers are now grown on most continents. The plant has large leaves that form a canopy over the fruits, and the vines have tendrils that allow them to climb or spread along the ground. The fruit is roughly cylindrical, elongated with tapered ends, and may be as large as 60 cm (24 in) long and 10 cm (3.9 in) in diameter.",
+    "diseases": [
+      {
+        "name": "Downy Mildew",
+        "scientific": "Pseudoperonospora cubensis",
+        "symptoms": "Angular, yellow to brown spots on upper leaf surfaces with fuzzy, purplish-gray growth on the undersides. Leaves eventually turn brown and die.",
+        "conditions": "Favored by cool, humid conditions with temperatures between 59-68°F (15-20°C). Spreads rapidly in wet weather.",
+        "management": [
+          "Plant resistant varieties",
+          "Apply fungicides preventatively",
+          "Improve air circulation",
+          "Avoid overhead irrigation",
+          "Remove and destroy infected plants"
+        ],
+        "claves": ["Clave 13 (Oomycete Diseases)", "Clave 29 (Downy Mildew Diseases)"]
+      }
+    ],
+    "related_plants": [
+      {
+        "id": "squash",
+        "name": "Squash",
+        "scientific_name": "Cucurbita spp.",
+        "image": "/static/images/squash.jpg"
+      },
+      {
+        "id": "melon",
+        "name": "Melon",
+        "scientific_name": "Cucumis melo",
+        "image": "/static/images/melon.jpg"
+      }
+    ]
+  },
+  {
+    "id": "grape",
+    "name": "Grape",
+    "scientific_name": "Vitis vinifera",
+    "type": "fruit",
+    "family": "Vitaceae",
+    "image": "/static/images/grape.jpg",
+    "description": "A woody perennial vine in the family Vitaceae. Grapes are susceptible to powdery mildew, downy mildew, and black rot.",
+    "diseases_count": 11,
+    "growth_stages": 5,
+    "quick_facts": {
+      "growth_habit": "Woody perennial vine",
+      "light": "Full Sun",
+      "water": "Moderate",
+      "temperature": "60-80°F (15-27°C)",
+      "height": "Climbing to 50+ feet (15+ m)",
+      "season": "Spring to Fall",
+      "maturity": "2-3 years to fruit"
+    },
+    "classification": {
+      "kingdom": "Plantae",
+      "division": "Magnoliophyta",
+      "class": "Magnoliopsida",
+      "order": "Vitales",
+      "family": "Vitaceae",
+      "genus": "Vitis",
+      "species": "V. vinifera"
+    },
+    "overview": "The grape (Vitis vinifera) is a woody perennial vine in the family Vitaceae. It is grown for its edible fruit, which can be eaten fresh as table grapes, dried to produce raisins, or crushed to make wine. Grapes are one of the oldest cultivated plants, with evidence of cultivation dating back 8,000 years. The vines have a flaky bark and produce lobed leaves. The fruit grows in clusters and can range in color from green (white grapes) to red, purple, or black.",
+    "diseases": [
+      {
+        "name": "Powdery Mildew",
+        "scientific": "Erysiphe necator",
+        "symptoms": "White, powdery fungal growth on leaves, shoots, and fruit. Infected leaves may curl upward and develop chlorotic spots. Infected berries may crack and fail to ripen properly.",
+        "conditions": "Favored by moderate temperatures (68-77°F or 20-25°C) and high humidity, but does not require free water for infection.",
+        "management": [
+          "Apply fungicides preventatively",
+          "Prune to improve air circulation",
+          "Remove and destroy infected plant parts",
+          "Plant resistant varieties",
+          "Avoid excessive nitrogen fertilization"
+        ],
+        "claves": ["Clave 12 (Fungal Leaf Spots)", "Clave 31 (Powdery Mildew Diseases)"]
+      }
+    ],
+    "related_plants": [
+      {
+        "id": "kiwi",
+        "name": "Kiwi",
+        "scientific_name": "Actinidia deliciosa",
+        "image": "/static/images/kiwi.jpg"
+      },
+      {
+        "id": "virginia-creeper",
+        "name": "Virginia Creeper",
+        "scientific_name": "Parthenocissus quinquefolia",
+        "image": "/static/images/virginia-creeper.jpg"
+      }
+    ]
+  },
+  {
+    "id": "bell-pepper",
+    "name": "Bell Pepper",
+    "scientific_name": "Capsicum annuum",
+    "type": "vegetable",
+    "family": "Solanaceae",
+    "image": "/static/images/bell-pepper.jpg",
+    "description": "A cultivar group of the species Capsicum annuum. Bell peppers are prone to bacterial spot, Phytophthora blight, and anthracnose.",
+    "diseases_count": 7,
+    "growth_stages": 4,
+    "quick_facts": {
+      "growth_habit": "Annual",
+      "light": "Full Sun",
+      "water": "Moderate",
+      "temperature": "70-85°F (21-29°C)",
+      "height": "1-3 feet (0.3-0.9 m)",
+      "season": "Summer to Fall",
+      "maturity": "60-90 days"
+    },
+    "classification": {
+      "kingdom": "Plantae",
+      "division": "Magnoliophyta",
+      "class": "Magnoliopsida",
+      "order": "Solanales",
+      "family": "Solanaceae",
+      "genus": "Capsicum",
+      "species": "C. annuum"
+    },
+    "overview": "Bell peppers (Capsicum annuum) are a cultivar group of the species Capsicum annuum, producing large, bell-shaped fruits in various colors including green, red, yellow, orange, and purple. Unlike other members of the Capsicum genus, bell peppers are not spicy as they contain a recessive gene that eliminates capsaicin, the compound responsible for the pungency found in other peppers. Bell peppers are rich in vitamins A and C and are commonly used in salads, stir-fries, and as a stuffing vegetable.",
+    "diseases": [
+      {
+        "name": "Bacterial Spot",
+        "scientific": "Xanthomonas campestris pv. vesicatoria",
+        "symptoms": "Small, water-soaked spots on leaves that enlarge and turn brown with yellow halos. Spots on fruit begin as small, raised blisters that develop into brown, scabby lesions.",
+        "conditions": "Favored by warm, wet weather. The bacteria are spread by rain splash, overhead irrigation, and handling wet plants.",
+        "management": [
+          "Use disease-free seeds and transplants",
+          "Rotate crops (2-3 year rotation)",
+          "Apply copper-based bactericides",
+          "Avoid working with wet plants",
+          "Remove and destroy infected plant material"
+        ],
+        "claves": ["Clave 14 (Bacterial Diseases)", "Clave 31 (Xanthomonas Diseases)"]
+      }
+    ],
+    "related_plants": [
+      {
+        "id": "tomato",
+        "name": "Tomato",
+        "scientific_name": "Solanum lycopersicum",
+        "image": "/static/images/tomato.jpg"
+      },
+      {
+        "id": "chili-pepper",
+        "name": "Chili Pepper",
+        "scientific_name": "Capsicum spp.",
+        "image": "/static/images/chili-pepper.jpg"
+      }
+    ]
+  },
+  {
+    "id": "carrot",
+    "name": "Carrot",
+    "scientific_name": "Daucus carota",
+    "type": "vegetable",
+    "family": "Apiaceae",
+    "image": "/static/images/carrot.jpg",
+    "description": "A root vegetable, usually orange in color, though purple, black, red, white, and yellow cultivars exist. Carrots are susceptible to Alternaria leaf blight and root-knot nematodes.",
+    "diseases_count": 6,
+    "growth_stages": 4,
+    "quick_facts": {
+      "growth_habit": "Biennial grown as annual",
+      "light": "Full Sun",
+      "water": "Moderate",
+      "temperature": "55-75°F (13-24°C)",
+      "height": "1-2 feet (0.3-0.6 m)",
+      "season": "Spring to Fall",
+      "maturity": "60-80 days"
+    },
+    "classification": {
+      "kingdom": "Plantae",
+      "division": "Magnoliophyta",
+      "class": "Magnoliopsida",
+      "order": "Apiales",
+      "family": "Apiaceae",
+      "genus": "Daucus",
+      "species": "D. carota"
+    },
+    "overview": "Carrots (Daucus carota) are a root vegetable native to Europe and southwestern Asia. They are typically orange, but other colors exist. Carrots are grown for their edible taproot, which is high in beta-carotene, fiber, vitamin K1, and potassium.",
+    "diseases": [
+      {
+        "name": "Alternaria Leaf Blight",
+        "scientific": "Alternaria dauci",
+        "symptoms": "Dark brown to black spots with yellow halos on leaves. Severe infections cause leaf death and reduced root size.",
+        "conditions": "Favored by warm, wet weather. The fungus overwinters in plant debris and seeds.",
+        "management": [
+          "Rotate crops",
+          "Use disease-free seeds",
+          "Apply fungicides as needed",
+          "Remove plant debris after harvest"
+        ],
+        "claves": ["Clave 12 (Fungal Leaf Spots)", "Clave 27 (Alternaria Diseases)"]
+      }
+    ],
+    "related_plants": [
+      {
+        "id": "parsley",
+        "name": "Parsley",
+        "scientific_name": "Petroselinum crispum",
+        "image": "/static/images/parsley.jpg"
+      },
+      {
+        "id": "celery",
+        "name": "Celery",
+        "scientific_name": "Apium graveolens",
+        "image": "/static/images/celery.jpg"
+      }
+    ]
+  },
+  {
+    "id": "lettuce",
+    "name": "Lettuce",
+    "scientific_name": "Lactuca sativa",
+    "type": "vegetable",
+    "family": "Asteraceae",
+    "image": "/static/images/lettuce.jpg",
+    "description": "A leafy green annual plant of the daisy family, Asteraceae. Lettuce is susceptible to downy mildew, bottom rot, and lettuce mosaic virus.",
+    "diseases_count": 5,
+    "growth_stages": 3,
+    "quick_facts": {
+      "growth_habit": "Annual",
+      "light": "Full Sun to Partial Shade",
+      "water": "Moderate",
+      "temperature": "60-70°F (15-21°C)",
+      "height": "0.5-1 foot (15-30 cm)",
+      "season": "Spring and Fall",
+      "maturity": "30-60 days"
+    },
+    "classification": {
+      "kingdom": "Plantae",
+      "division": "Magnoliophyta",
+      "class": "Magnoliopsida",
+      "order": "Asterales",
+      "family": "Asteraceae",
+      "genus": "Lactuca",
+      "species": "L. sativa"
+    },
+    "overview": "Lettuce (Lactuca sativa) is a leafy annual plant most often grown as a salad green. It is one of the most popular salad vegetables worldwide. Lettuce is easy to grow and matures quickly, making it a staple in home gardens.",
+    "diseases": [
+      {
+        "name": "Downy Mildew",
+        "scientific": "Bremia lactucae",
+        "symptoms": "Yellow spots on upper leaf surfaces and white, fluffy growth on undersides. Severe infections cause leaf collapse.",
+        "conditions": "Favored by cool, moist conditions. The pathogen spreads rapidly in wet weather.",
+        "management": [
+          "Plant resistant varieties",
+          "Improve air circulation",
+          "Apply fungicides preventatively",
+          "Avoid overhead irrigation"
+        ],
+        "claves": ["Clave 13 (Oomycete Diseases)", "Clave 29 (Downy Mildew Diseases)"]
+      }
+    ],
+    "related_plants": [
+      {
+        "id": "endive",
+        "name": "Endive",
+        "scientific_name": "Cichorium endivia",
+        "image": "/static/images/endive.jpg"
+      },
+      {
+        "id": "radicchio",
+        "name": "Radicchio",
+        "scientific_name": "Cichorium intybus",
+        "image": "/static/images/radicchio.jpg"
+      }
+    ]
+  },
+  {
+    "id": "corn",
+    "name": "Corn",
+    "scientific_name": "Zea mays",
+    "type": "grain",
+    "family": "Poaceae",
+    "image": "/static/images/corn.jpg",
+    "description": "A cereal plant that yields large grains, or kernels, set in rows on a cob. Corn is susceptible to northern corn leaf blight, common rust, and smut.",
+    "diseases_count": 9,
+    "growth_stages": 6,
+    "quick_facts": {
+      "growth_habit": "Annual grass",
+      "light": "Full Sun",
+      "water": "Moderate",
+      "temperature": "65-95°F (18-35°C)",
+      "height": "6-12 feet (1.8-3.7 m)",
+      "season": "Spring to Fall",
+      "maturity": "60-100 days"
+    },
+    "classification": {
+      "kingdom": "Plantae",
+      "division": "Magnoliophyta",
+      "class": "Liliopsida",
+      "order": "Poales",
+      "family": "Poaceae",
+      "genus": "Zea",
+      "species": "Z. mays"
+    },
+    "overview": "Corn (Zea mays), also known as maize, is a cereal grain first domesticated by indigenous peoples in southern Mexico about 10,000 years ago. It is a staple food in many parts of the world and is used for food, animal feed, and industrial products.",
+    "diseases": [
+      {
+        "name": "Northern Corn Leaf Blight",
+        "scientific": "Exserohilum turcicum",
+        "symptoms": "Long, gray-green or tan lesions on leaves. Severe infections can cause premature leaf death and reduced yield.",
+        "conditions": "Favored by moderate temperatures and high humidity.",
+        "management": [
+          "Plant resistant hybrids",
+          "Rotate crops",
+          "Apply fungicides if needed",
+          "Plow under crop debris"
+        ],
+        "claves": ["Clave 12 (Fungal Leaf Spots)", "Clave 33 (Helminthosporium Diseases)"]
+      }
+    ],
+    "related_plants": [
+      {
+        "id": "wheat",
+        "name": "Wheat",
+        "scientific_name": "Triticum aestivum",
+        "image": "/static/images/wheat.jpg"
+      },
+      {
+        "id": "sorghum",
+        "name": "Sorghum",
+        "scientific_name": "Sorghum bicolor",
+        "image": "/static/images/sorghum.jpg"
+      }
+    ]
+  }
+]
