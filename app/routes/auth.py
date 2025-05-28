@@ -39,17 +39,17 @@ def register():
    
  
 
-    if email[0] == '#' and mongo.db.adminusers.find_one({'email': email}):
-        return jsonify({'error': 'Email already exists'}), 400
+    # if email[0] == '#' and mongo.db.adminusers.find_one({'email': email}):
+    #     return jsonify({'error': 'Email already exists'}), 400
     if mongo.db.users.find_one({'email': email}):
         return jsonify({'error': 'Email already exists'}), 400
 
     hashed_pw = generate_password_hash(password)
     print("Hashed password: ", hashed_pw)
-    if email[0] == '#':
-        user_id = mongo.db.adminusers.insert_one({'name': name, 'email': email, 'password': hashed_pw}).inserted_id
-    else:
-        user_id = mongo.db.users.insert_one({'name':name,'email': email, 'password': hashed_pw}).inserted_id
+    # if email[0] == '#':
+    #     user_id = mongo.db.adminusers.insert_one({'name': name, 'email': email, 'password': hashed_pw}).inserted_id
+    # else:
+    user_id = mongo.db.users.insert_one({'name':name,'email': email, 'password': hashed_pw}).inserted_id
    
     print("User ID: ", user_id)
     token = generate_token(user_id)
@@ -68,7 +68,7 @@ def login():
     if email.startswith('#'):
         user = mongo.db.adminusers.find_one({'email': email})
         is_admin = True
-    else:
+    if user is None or not email.startswith('#'):
         user = mongo.db.users.find_one({'email': email})
         is_admin = False
 

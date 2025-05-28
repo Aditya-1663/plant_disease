@@ -152,7 +152,7 @@ function getLocation() {
     //     + "\n town: " + address.town
     //     + "\n suburb: " + address.suburb
     //     + "\n city: " + address.city
-    //     + "\n county: " + address.county
+    //     + "\n county: " + address.county`
     //     + "\n state: " + address.state
     //     + "\n country: " + address.country
     // );
