@@ -50,6 +50,14 @@
 
   #captureBtn {
     border-radius: 6px;
+    margin-top: 2rem;
+
+    border-color: gray;
+
+  }
+  #captureBtn:hover {
+    background-color: #6c757d;
+    color: #fff;
   }
 
   /* Image and video preview */
@@ -73,3 +81,138 @@
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .detect-container {
+    padding: 1rem 0.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .upload-area {
+    padding: 2rem 1rem;
+  }
+
+  .upload-icon {
+    font-size: 2.5rem;
+  }
+
+  .tab-btn {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .tab-btn span {
+    display: none;
+  }
+
+  .btn {
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+  }
+
+  .btn-primary {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+   .m-485{
+    /* border :red solid 2px; */
+    width: 100%;
+    margin: 0 auto;
+   }
+  .card-body {
+    padding: 1rem;
+  }
+
+  .upload-area {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .upload-icon {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  .tabs {
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
+
+  .tab-btn {
+    padding: 0.5rem 0.25rem;
+    min-height: 44px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus styles for accessibility */
+.btn:focus,
+.tab-btn:focus,
+input:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .upload-area {
+    border-color: #000;
+  }
+
+  .btn-outline {
+    border-color: #000;
+    color: #000;
+  }
+}

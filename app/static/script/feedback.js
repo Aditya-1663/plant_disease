@@ -26,16 +26,37 @@ async function fetchFeedbackDataFromAPI() {
     const data = await response.json()
 
     feedbackData.length = 0
+    
     data.forEach(item => {
-      feedbackData.push({
-        id: item._id,
-        name: item.name,
-        email: item.email,
-        rating: item.rating,
-        feedbackType: item.feedbackType,
-        message: item.message,
-        date: item.timestamp, 
-      })
+       const dateObj = new Date(item.timestamp)
+    
+  // Check if the date is today
+  const now = new Date()
+  const isToday = dateObj.toDateString() === now.toDateString()
+
+  let displayDate
+
+  if (isToday) {
+    
+    displayDate = "Today "+dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  } else {
+    
+    displayDate = dateObj.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    })
+  }
+   
+  feedbackData.push({
+    id: item._id,
+    name: item.name,
+    email: item.email,
+    rating: item.rating,
+    feedbackType: item.type,
+    message: item.message,
+    date: displayDate, // Use the formatted date/time
+  })
     })
 
     loadFeedbackData()
@@ -242,8 +263,8 @@ function createFeedbackItem(feedback) {
         </div>
       </div>
       <div class="feedback-meta">
-        <div class="feedback-date">${formattedDate}</div>
-        <div class="feedback-type ${feedback.feedbackType}">${getFeedbackTypeName(feedback.feedbackType)}</div>
+        <div class="feedback-date">${feedback.date}</div>
+        <div class="feedback-type ${feedback.feedbackType+"1"}">${getFeedbackTypeName(feedback.feedbackType)}</div>
       </div>
     </div>
     <div class="feedback-rating">

@@ -22,7 +22,6 @@ let currentPage = 1;
 const itemsPerPage = 5;
 let filteredData = [...mockData];
 
-// Initialize the dashboard
 document.addEventListener('DOMContentLoaded', function() {
     renderTable();
     setupEventListeners();
@@ -62,9 +61,10 @@ function setupEventListeners() {
 
     // Modal
     const modal = document.getElementById('detailModal');
-    const closeBtn = document.querySelector('.close');
+    const closeBtn = document.querySelector('#close');
     
     closeBtn.addEventListener('click', () => {
+        alert('Modal closed');
         modal.style.display = 'none';
     });
 
@@ -74,7 +74,13 @@ function setupEventListeners() {
         }
     });
 }
-
+const modal = document.getElementById('detailModal');
+    const closeBtn = document.querySelector('#close');
+    
+    closeBtn.addEventListener('click', () => {
+    
+        modal.style.display = 'none';
+    });
 function renderTable() {
     const tableBody = document.getElementById('tableBody');
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -202,7 +208,7 @@ function showDetails(id) {
                 <p><strong>Date & Time:</strong> ${item.datetime}</p>
                 <p><strong>User ID:</strong> ${item.userId}</p>
                 <p><strong>Location:</strong> ${item.location}</p>
-                <p><strong>plantname:</strong> ${item.plantname}</p>
+                <p><strong>Plantname:</strong> ${item.plantname}</p>
             </div>
             <div>
                 <h3>Detection Results</h3>
@@ -226,7 +232,8 @@ function updateStats() {
     const totalSearches = filteredData.length;
     // const diseasesDetected = filteredData.filter(item => item.status === 'detected').length;
     const diseasesDetected = filteredData.length;
-    const uniqueLocations = new Set(filteredData.map(item => item.location.split(',')[1]?.trim())).size;
+    // const uniqueLocations = new Set(filteredData.map(item => item.location.split(',')[1]?.trim())).size;
+    const uniqueLocations = 1;
     const today = new Date().toDateString();
     const todaySearches = filteredData.filter(item => new Date(item.datetime).toDateString() === today).length;
 
@@ -237,10 +244,16 @@ function updateStats() {
 }
 
 function exportData() {
+    console.log('Exporting data...'+ filteredData);
+    if (filteredData.length === 0) {
+        alert('No data to export.');
+        return;
+    }
     const csvContent = "data:text/csv;charset=utf-8," 
-        + "Date,User ID,Location,Search Type,Disease,Confidence,Status\n"
+        + "Date & Time,User ID,Location,Plantname,Disease,Crop Type,Processing Time\n"
         + filteredData.map(item => 
-            `"${item.datetime}","${item.userId}","${item.location}","${item.searchType}","${item.disease}",${item.confidence},"${item.status}"`
+            
+            `"${item.datetime}","${item.userId}","${item.location}","${item.plantname}","${item.disease}",${item.details.cropType},"${item.details.processingTime}"`
         ).join("\n");
 
     const encodedUri = encodeURI(csvContent);
@@ -252,28 +265,3 @@ function exportData() {
     document.body.removeChild(link);
 }
 
-// Simulate real-time updates
-// setInterval(() => {
-//     // Add a new random search every 30 seconds (for demo purposes)
-//     const newSearch = {
-//         id: mockData.length + 1,
-//         datetime: new Date().toISOString().slice(0, 19).replace('T', ' '),
-//         userId: `USR${String(Math.floor(Math.random() * 1000)).padStart(3, '0')}`,
-//         location: ['Maharashtra, India', 'California, USA', 'São Paulo, Brazil', 'Nairobi, Kenya'][Math.floor(Math.random() * 4)],
-//         searchType: 'Image Upload',
-//         disease: ['Late Blight', 'Healthy', 'Leaf Rust', 'Mosaic Virus'][Math.floor(Math.random() * 4)],
-//         confidence: Math.floor(Math.random() * 40) + 60,
-//         status: Math.random() > 0.3 ? 'detected' : 'healthy',
-//         details: {
-//             cropType: ['Tomato', 'Wheat', 'Coffee', 'Maize'][Math.floor(Math.random() * 4)],
-//             imageSize: `${(Math.random() * 3 + 1).toFixed(1)} MB`,
-//             processingTime: `${(Math.random() * 2 + 0.5).toFixed(1)}s`,
-//             recommendations: 'Follow recommended treatment protocol'
-//         }
-//     };
-    
-//     mockData.unshift(newSearch);
-//     if (mockData.length > 50) mockData.pop(); // Keep only last 50 entries
-    
-//     applyFilters(); // Refresh the display
-// }, 30000);

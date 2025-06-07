@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Leaf Guard{% endblock %}</title>
@@ -79,8 +83,8 @@
 
 
       
-        <button class="mobile-menu-btn">
-          <i class="fas fa-bars"></i>
+        <button class="mobile-menu-btn red">
+          <i class="fas fa-bars "></i>
         </button>
       </div>
       
@@ -92,32 +96,26 @@
   <div class="mobile-menu">
     <nav>
       <ul>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
         <li>
   {% if session.get('name') %}
-    <a href="detect.html">Detect Disease</a>
+    <a href="{{ url_for('detect') }}">Detect Disease</a>
   {% else %}
     <a href="{{ url_for('login') }}">Detect Disease</a>
   {% endif %}
 </li>
 
-        <li><a href="plants.html">Plant Database</a></li>
+        <li><a href="/plants">Plant Database</a></li>
         {% if session.get('is_admin') %}
          <a href="/userlog">Users Log</a>
   {% else %}
     
   {% endif %}
-        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="{{ url_for('feedback') }}">Feedback</a></li>
       </ul>
     </nav>
     <div class="mobile-actions">
-      <div class="language-options">
-        <p>Language</p>
-        <div class="options">
-          <button data-lang="en">English</button>
-          <button data-lang="hi">हिन्दी</button>
-        </div>
-      </div>
+     
      <ul class="auth-buttons">
   {% if session.get('name') %}
     <li class="user-circle-wrapper">

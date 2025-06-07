@@ -116,9 +116,11 @@
         <section class="table-section ">
             <div class="table-header">
                 <h2>User Search History</h2>
+             <!--
                 <button id="exportBtn" class="export-btn">
                     <i class="fas fa-download"></i> Export Data
                 </button>
+                --> 
             </div>
             <div class="table-container">
                 <table id="searchTable">
@@ -146,10 +148,9 @@
         </section>
     </div>
 
-    <!-- Modal for viewing details -->
     <div id="detailModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span id="close" class="close ">&times;</span>
             <h2>Search Details</h2>
             <div id="modalBody">
                 <!-- Details will be populated by JavaScript -->

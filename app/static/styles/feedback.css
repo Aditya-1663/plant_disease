@@ -111,26 +111,29 @@
 .feedback-type {
   background-color: var(--secondary-color);
   padding: 0.25rem 0.5rem;
+  /* max-height: 30px; */
   border-radius: 1rem;
   font-size: 0.75rem;
+ 
 }
 
-.feedback-type.detection {
+.feedback-type.detection1 {
   background-color: rgba(46, 125, 50, 0.1);
   color: var(--primary-color);
 }
 
-.feedback-type.usability {
+.feedback-type.usability1 {
   background-color: rgba(33, 150, 243, 0.1);
   color: #2196f3;
+
 }
 
-.feedback-type.features {
+.feedback-type.features1 {
   background-color: rgba(156, 39, 176, 0.1);
   color: #9c27b0;
 }
 
-.feedback-type.other {
+.feedback-type.other1 {
   background-color: rgba(158, 158, 158, 0.1);
   color: #757575;
 }

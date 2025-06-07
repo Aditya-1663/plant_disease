@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request,jsonify
 from markupsafe import Markup
 import os, random, base64
-from .model import predict_image
+from .model import predict_image 
 import app.utils as utils
 from datetime import datetime
 from app import mongo 
@@ -12,15 +12,15 @@ def separate_string(input_str):
     first_part = parts[0]
 
     if len(parts) > 1:
-        rest = parts[1]
+        rest = parts[1] 
         
         words = [word for word in rest.split('_') if word]
         second_part = ' '.join(words)
     else:
         second_part = ''
 
-    return first_part, second_part
-@main.route('/')
+    return first_part, second_part 
+@main.route('/')  
 def home():
     return render_template('index.html')
 
@@ -106,7 +106,7 @@ def logout():
 
 def getuserlog():
     try:
-        userlogdata= mongo.db.userlog.find().sort("timestamp", -1)
+        userlogdata= mongo.db.userlog.find().sort("datetime", -1)
         data = []
        
         for fb in userlogdata:

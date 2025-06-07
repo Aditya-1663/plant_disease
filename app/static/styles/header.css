@@ -1175,3 +1175,19 @@ input:focus, select:focus, textarea:focus {
   border:red 1px solid;
  
 }
+body.menu-open {
+  overflow: hidden;
+}
+
+.mobile-menu.active {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu {
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-100%);
+  opacity: 0;
+  visibility: hidden;
+}

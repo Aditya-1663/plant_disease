@@ -22,7 +22,7 @@ def submitfeedback():
             "rating": int(rating),
             "type": feedback_type,
             "message": message,
-            "timestamp": datetime.utcnow()
+            "timestamp":  datetime.utcnow().isoformat() + "Z"
         }
       
 
