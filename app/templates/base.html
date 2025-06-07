@@ -62,7 +62,7 @@
     
       <div class="header-actions">
       
-        <ul class="auth-buttons">
+        <ul class="auth-buttons " id="hidden1">
   {% if session.get('name') %}
     <li class="user-circle-wrapper">
   <div class="user-circle">
@@ -70,12 +70,12 @@
   </div>
   <div class="tooltip">{{ session['name'] }}</div>
 </li>
-    <li>
-      <a href="{{ url_for('auth.logout') }}" class="btn btn-danger">Logout</a>
+    <li id="mlogout">
+      <a href="{{ url_for('auth.logout') }}" class="btn btn-danger  ">Logout...</a>
     </li>
   {% else %}
-    <li>
-      <a href="{{ url_for('login') }}" class="btn btn-primary">Sign In</a>
+    <li id="msignin">
+      <a href="{{ url_for('login') }}" class="btn btn-primary ">Sign In</a>
     </li>
   {% endif %}
 </ul>

@@ -1060,6 +1060,7 @@ input:focus, select:focus, textarea:focus {
   .feedback-info {
     grid-template-columns: 1fr 1fr;
   }
+ 
 }
 
 @media (max-width: 767px) {
@@ -1067,7 +1068,9 @@ input:focus, select:focus, textarea:focus {
     flex-direction: column;
     align-items: flex-start;
   }
-
+   #mlogout,#msignin,#hidden1{
+    display: none ;
+  }
   .prices-header p {
     margin-top: 0.5rem;
   }
@@ -1171,10 +1174,7 @@ input:focus, select:focus, textarea:focus {
   visibility: visible;
   opacity: 1;
 }
-.red{
-  border:red 1px solid;
- 
-}
+
 body.menu-open {
   overflow: hidden;
 }
