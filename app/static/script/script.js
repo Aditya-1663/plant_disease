@@ -54,7 +54,7 @@ function addEventListeners() {
     });
   });
 }
-
+console.log("App initialized");
 document.addEventListener("DOMContentLoaded", () => {
   initApp();
   
